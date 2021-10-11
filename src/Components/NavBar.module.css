@@ -1,0 +1,8 @@
+.nav{
+    background-color:lightblue;
+    grid-area: n;
+  
+  }
+  .item{
+      color: wtite;
+  }

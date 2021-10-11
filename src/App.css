@@ -8,23 +8,8 @@
   "n c";
   grid-template-rows: 60px 1fr;
   grid-template-columns: 2fr 10fr;
+  grid-column-gap: 10px;
+  grid-row-gap: 10px;
   /* grid-gap: 10px; */
 }
-.header{
-grid-area: h;
-background-color: lawngreen;
-}
-.header img{
-  width: 40px;
-  height: 40px;
-}
-.nav{
-  background-color:lightblue;
-  grid-area: n;
 
-}
-.content{
-  background-color: green;
-  grid-area: c;
-
-}
