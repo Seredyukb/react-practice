@@ -1,8 +1,12 @@
-.nav{
-    background-color:lightblue;
+.nav {
+    background-color: lightblue;
     grid-area: n;
-  
-  }
-  .item{
-      color: wtite;
-  }
+    padding: 20px;
+}
+.item a {
+    text-decoration: none;
+    color: white;
+}
+.item a.active {
+    color: gold;
+}

@@ -7,8 +7,8 @@ const MyPosts = () => {
     return (
         <div>
             My posts
-            <Post />
-            <Post />
+            <Post message='Hello, how r u?' count='15' />
+            <Post message='Do you love me?' count='20' />
         </div>
     )
 }

@@ -1,11 +1,11 @@
-.app-wrapper{
+.app-wrapper {
   margin: 0 auto;
   padding: 0;
   width: 1200px;
   display: grid;
   grid-template-areas:
-  "h h"
-  "n c";
+    "h h"
+    "n c";
   grid-template-rows: 60px 1fr;
   grid-template-columns: 2fr 10fr;
   grid-column-gap: 10px;
@@ -13,3 +13,7 @@
   /* grid-gap: 10px; */
 }
 
+.app-wrapper-content {
+  background-color: green;
+  grid-area: c;
+}
