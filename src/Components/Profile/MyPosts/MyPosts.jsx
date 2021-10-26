@@ -6,15 +6,22 @@ const MyPosts = (props) => {
 
 
     let postsElements = props.postData.map(p => { return <Post message={p.message} count={p.count} /> })
+    let textAreaData = React.createRef();
+    let addPost = () => {
+        debugger;
+        let text = textAreaData.current.value;
+
+       props.addPosta(text);
+    }
     return (
         <div className={classes.postsBlock}>
             <h3>My posts</h3>
             <div>
                 <div>
-                    <textarea></textarea>
+                    <textarea ref={textAreaData}></textarea>
                 </div>
                 <div>
-                    <button>Add post</button>
+                    <button onClick={addPost}>Add post</button>
                 </div>
             </div>
             <div className={classes.posts}>

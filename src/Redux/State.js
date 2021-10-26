@@ -38,7 +38,8 @@ const state = {
             {
                 id: 4,
                 name: 'Lia',
-                ava: 'https://i.pinimg.com/originals/18/e8/c7/18e8c7c7cca213f03a28148189d4599e.jpg'
+                ava: 'https://i.pinimg.com/originals/18/e8/c7/18e8c7c7cca213f03a28148189d4599e.jpg',
+                message: 'What does it mean Bro???'
             },
 
         ],
@@ -203,6 +204,18 @@ const state = {
     }
 
 
+
+}
+
+
+export let addPosta = (texta) => {
+    debugger;
+    let newPosta = {
+        id: state.profilePage.postData.length + 1,
+        message: texta,
+        count: 0,
+    }
+    state.profilePage.postData.push(newPosta);
 
 }
 export default state;
