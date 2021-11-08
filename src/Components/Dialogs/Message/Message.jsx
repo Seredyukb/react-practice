@@ -9,11 +9,12 @@ const Message = (props) => {
         alert(textAnswer);
 
     }
+
     return (<div>
         <div className={classes.message}>
             {props.message}
         </div>
-        <textarea ref={answer}></textarea>
+        <textarea ref={answer} value='WTF???'></textarea>
         <div>
             <button onClick={addAnswer}>Ответить</button>
         </div>
