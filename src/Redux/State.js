@@ -1,3 +1,12 @@
+const ADD_POST = 'addPosta';
+const UPDATE_NEW_POST_TEXT = 'updateNewPosta';
+const SEND_MESSAGE = 'sendMessageText';
+const UPDATE_NEW_MESSAGE_TEXT = 'updateNewMessageText';
+
+
+
+
+
 let store = {
     _state: {
         profilePage: {
@@ -46,7 +55,7 @@ let store = {
                 },
 
             ],
-            newMessageText: 'Введите сообщение',
+            newMessageBody: '',
 
         },
         friendsPage: {
@@ -204,32 +213,12 @@ let store = {
 
 
             ]
-
         }
-
-
-
     },
     _callSubscriber() {
         console.log('State is changed');
     },
-    // addPosta() {
-    //     let newPosta = {
-    //         id: this._state.profilePage.postData.length + 1,
-    //         message: this._state.profilePage.newPostText,
-    //         count: 0,
-    //     }
-    //     this._state.profilePage.postData.push(newPosta);
-    //     this._state.profilePage.newPostText = '';
-    //     this._callSubscriber(this._state);
 
-    // },
-    // updateNewPosta(newText) {
-
-    //     this._state.profilePage.newPostText = newText
-    //     this._callSubscriber(this._state);
-
-    // },
     subscribe(observer) {
         this._callSubscriber = observer;
     },
@@ -238,7 +227,7 @@ let store = {
     },
     dispatch(action) {
 
-        if (action.type === 'addPosta') {
+        if (action.type === ADD_POST) {
             let newPosta = {
                 id: this._state.profilePage.postData.length + 1,
                 message: this._state.profilePage.newPostText,
@@ -247,17 +236,33 @@ let store = {
             this._state.profilePage.postData.push(newPosta);
             this._state.profilePage.newPostText = '';
             this._callSubscriber(this._state);
-        } else if (action.type === 'updateNewPosta') {
+        } else if (action.type === UPDATE_NEW_POST_TEXT) {
+
             let newText = action.newText;
             this._state.profilePage.newPostText = newText;
             this._callSubscriber(this._state);
+        } else if (action.type === UPDATE_NEW_MESSAGE_TEXT) {
+            this._state.dialogsPage.newMessageBody = action.body;
+            this._callSubscriber(this._state);
+        } else if (action.type === SEND_MESSAGE) {
+            debugger;
+            this._state.dialogsPage.dialogsData.push({
+                id: this._state.dialogsPage.dialogsData.lenth + 1,
+                message: this._state.dialogsPage.newMessageBody,
+            });
+            this._state.dialogsPage.newMessageBody = '';
+            this._callSubscriber(this._state);
+
         }
     }
 }
 
-export const actionCreatorUpdateNewPosta = (text) => ({ type: 'updateNewPosta', newText: text })
+export const actionCreatorUpdateNewPosta = (text) => ({ type: UPDATE_NEW_POST_TEXT, newText: text })
 
-export const actionCreatorAddPosta = () => ({ type: 'addPosta' });
+export const actionCreatorUpdateNewMessage = (body) => ({ type: UPDATE_NEW_MESSAGE_TEXT, body: body })
+export const actionCreatorSendMessage = () => ({ type: SEND_MESSAGE });
+
+export const actionCreatorAddPosta = () => ({ type: ADD_POST });
 
 
 window.store = store;
