@@ -1,11 +1,5 @@
-const ADD_POST = 'addPosta';
-const UPDATE_NEW_POST_TEXT = 'updateNewPosta';
-const SEND_MESSAGE = 'sendMessageText';
-const UPDATE_NEW_MESSAGE_TEXT = 'updateNewMessageText';
-
-
-
-
+import dialogsReducer from "./DialogsReducer";
+import profileReducer from "./ProfileReducer";
 
 let store = {
     _state: {
@@ -218,7 +212,6 @@ let store = {
     _callSubscriber() {
         console.log('State is changed');
     },
-
     subscribe(observer) {
         this._callSubscriber = observer;
     },
@@ -226,44 +219,11 @@ let store = {
         return this._state;
     },
     dispatch(action) {
-
-        if (action.type === ADD_POST) {
-            let newPosta = {
-                id: this._state.profilePage.postData.length + 1,
-                message: this._state.profilePage.newPostText,
-                count: 0,
-            }
-            this._state.profilePage.postData.push(newPosta);
-            this._state.profilePage.newPostText = '';
-            this._callSubscriber(this._state);
-        } else if (action.type === UPDATE_NEW_POST_TEXT) {
-
-            let newText = action.newText;
-            this._state.profilePage.newPostText = newText;
-            this._callSubscriber(this._state);
-        } else if (action.type === UPDATE_NEW_MESSAGE_TEXT) {
-            this._state.dialogsPage.newMessageBody = action.body;
-            this._callSubscriber(this._state);
-        } else if (action.type === SEND_MESSAGE) {
-            debugger;
-            this._state.dialogsPage.dialogsData.push({
-                id: this._state.dialogsPage.dialogsData.lenth + 1,
-                message: this._state.dialogsPage.newMessageBody,
-            });
-            this._state.dialogsPage.newMessageBody = '';
-            this._callSubscriber(this._state);
-
-        }
+        this._state.profilePage = profileReducer(this._state.profilePage, action);
+        this._state.dialogsPage = dialogsReducer(this._state.dialogsPage, action);
+        this._callSubscriber(this._state);
     }
 }
-
-export const actionCreatorUpdateNewPosta = (text) => ({ type: UPDATE_NEW_POST_TEXT, newText: text })
-
-export const actionCreatorUpdateNewMessage = (body) => ({ type: UPDATE_NEW_MESSAGE_TEXT, body: body })
-export const actionCreatorSendMessage = () => ({ type: SEND_MESSAGE });
-
-export const actionCreatorAddPosta = () => ({ type: ADD_POST });
-
 
 window.store = store;
 
