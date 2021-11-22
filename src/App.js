@@ -10,8 +10,10 @@ import News from './Components/News/News';
 import Music from './Components/Music/Music';
 import Settings from './Components/Settings/Settings';
 import Friends from './Components/Friends/Friends';
+import DialogsContainer from './Components/Dialogs/DialogsContainer';
 
 const App = (props) => {
+  debugger;
   return (
     <BrowserRouter>
       <div className="app-wrapper">
@@ -19,8 +21,8 @@ const App = (props) => {
         <NavBar />
         {/* <Profile /> */}
         <div className='app-wrapper-content'>
-          <Route path='/Dialogs' render={() => <Dialogs dispatch={props.dispatch} store={props.store} />} />
-          <Route path='/Profile' render={() => <Profile profilePage={props.state.profilePage} dispatch={props.dispatch} />} />
+          <Route path='/Dialogs' render={() => <DialogsContainer store={props.store} />} />
+          <Route path='/Profile' render={() => <Profile store={props.store} />} />
           <Route path='/News' component={News} />
           <Route path='/Music' component={Music} />
           <Route path='/Settings' component={Settings} />

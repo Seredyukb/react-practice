@@ -5,21 +5,18 @@ import Message from "./Message/Message";
 import { actionCreatorSendMessage, actionCreatorUpdateNewMessage } from "../../Redux/DialogsReducer";
 const Dialogs = (props) => {
     let textAreaDialogsRef = React.createRef();
-    let state = props.store.getState().dialogsPage;
-    let newDialogsResult = state.dialogsData.map(el => {
+    let newDialogsResult = props.dialogsData.map(el => {
 
         return <DialogItem id={el.id} name={el.name} ava={el.ava} />
 
     })
 
-    let newMessagesResult = state.dialogsData.map(m => {
+    let newMessagesResult = props.dialogsData.map(m => {
         return <Message message={m.message} dispatch={props.dispatch} />
     })
-    let newMessageBody = state.newMessageBody;
     let onSendMessageClick = () => {
         debugger;
-
-        props.store.dispatch(actionCreatorSendMessage());
+        props.onSendMessageClick();
         textAreaDialogsRef.current.value = '';
 
 
@@ -27,7 +24,7 @@ const Dialogs = (props) => {
 
     let onNewMessageChange = (e) => {
         let body = e.target.value;
-        props.store.dispatch(actionCreatorUpdateNewMessage(body));
+        props.onNewMessageChange(body);
     }
 
     return (

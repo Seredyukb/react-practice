@@ -4,6 +4,7 @@ import FriendsItem from "./FriensItem/FriendsItem";
 
 
 const Friends = (props) => {
+    debugger;
     let arrFriendsData = props.state.friendsData.map((el) => {
         return (
             <FriendsItem ava={el.ava} name={el.name} />

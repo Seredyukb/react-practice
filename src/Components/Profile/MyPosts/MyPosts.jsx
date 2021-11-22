@@ -1,5 +1,4 @@
 import React from "react";
-import { actionCreatorAddPosta, actionCreatorUpdateNewPosta } from "../../../Redux/ProfileReducer";
 import classes from './MyPosts.module.css';
 import Post from "./Post/Post";
 
@@ -9,13 +8,13 @@ const MyPosts = (props) => {
 
     let postsElements = props.postData.map(p => { return <Post message={p.message} count={p.count} /> })
     let textAreaData = React.createRef();
-    let addPost = () => {
-        props.dispatch(actionCreatorAddPosta());
-        textAreaData.current.value = '';
+    let OnaddPost = () => {
+        props.addPost();
     }
     let addNewPosta = () => {
+        debugger;
         let text = textAreaData.current.value;
-        props.dispatch(actionCreatorUpdateNewPosta(text));
+        props.addNewPost(text);
     }
     return (
         <div className={classes.postsBlock}>
@@ -25,7 +24,7 @@ const MyPosts = (props) => {
                     <textarea ref={textAreaData} value={props.newPostText} onChange={addNewPosta}></textarea>
                 </div>
                 <div>
-                    <button onClick={addPost}>Add post</button>
+                    <button onClick={OnaddPost}>Add post</button>
                 </div>
             </div>
             <div className={classes.posts}>
