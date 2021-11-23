@@ -17,5 +17,5 @@ let mapDispatchToProps = (dispatch)=>{
 
 
 
-const superDialogsContainer = connect(mapStateToProps,mapDispatchToProps)(Dialogs);
-export default superDialogsContainer;
+const DialogsContainer = connect(mapStateToProps,mapDispatchToProps)(Dialogs);
+export default DialogsContainer;
