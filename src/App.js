@@ -5,11 +5,11 @@ import Header from './Components/Header/Header';
 import NavBar from './Components/NavBar/NavBar';
 import { Route } from 'react-router';
 import { BrowserRouter } from 'react-router-dom';
-import News from './Components/News/News';
 import Music from './Components/Music/Music';
 import Settings from './Components/Settings/Settings';
 import Friends from './Components/Friends/Friends';
 import DialogsContainer from './Components/Dialogs/DialogsContainer';
+import UsersContainer from './Components/Users/UsersContainer';
 
 const App = (props) => {
   return (
@@ -21,7 +21,7 @@ const App = (props) => {
         <div className='app-wrapper-content'>
           <Route path='/Dialogs' render={() => <DialogsContainer />} />
           <Route path='/Profile' render={() => <Profile />} />
-          <Route path='/News' component={News} />
+          <Route path='/Users' component={UsersContainer} />
           <Route path='/Music' component={Music} />
           <Route path='/Settings' component={Settings} />
           <Route path='/Friends' render={() => <Friends />} />
