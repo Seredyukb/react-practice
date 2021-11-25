@@ -1,5 +1,5 @@
 .nav {
-    background-color: lightblue;
+    background-color: #b0ff05;
     grid-area: n;
     padding: 20px;
 }
@@ -8,5 +8,5 @@
     color: white;
 }
 .item a.active {
-    color: gold;
+    color: #cabb1e;
 }

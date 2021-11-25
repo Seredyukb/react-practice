@@ -3,7 +3,7 @@ import classes from './Header.module.css';
 const Header = () => {
     return (
         <header className={classes.header}>
-            <img src="https://i.pinimg.com/originals/3f/3d/d9/3f3dd9219f7bb1c9617cf4f154b70383.jpg" />
+            <img src="https://genlogo.com/u_ajax.php?handler=GenLogo&command=ajax_site_get_colors&t=Connect&s=Connect%20to%20connect&g=315&l=79&f=264&c=250&x=1637844578&oid=278732" />
         </header>
 
     )

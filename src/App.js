@@ -5,11 +5,11 @@ import Header from './Components/Header/Header';
 import NavBar from './Components/NavBar/NavBar';
 import { Route } from 'react-router';
 import { BrowserRouter } from 'react-router-dom';
-import Music from './Components/Music/Music';
 import Settings from './Components/Settings/Settings';
-import Friends from './Components/Friends/Friends';
 import DialogsContainer from './Components/Dialogs/DialogsContainer';
 import UsersContainer from './Components/Users/UsersContainer';
+import FriendsContainer from './Components/Friends/FriendsContainer';
+import newsContainer from './Components/News/NewsContainer';
 
 const App = (props) => {
   return (
@@ -22,9 +22,9 @@ const App = (props) => {
           <Route path='/Dialogs' render={() => <DialogsContainer />} />
           <Route path='/Profile' render={() => <Profile />} />
           <Route path='/Users' component={UsersContainer} />
-          <Route path='/Music' component={Music} />
+          <Route path='/News' component={newsContainer} />
           <Route path='/Settings' component={Settings} />
-          <Route path='/Friends' render={() => <Friends />} />
+          <Route path='/Friends' render={() => <FriendsContainer />} />
         </div>
       </div>
     </BrowserRouter>
