@@ -4,12 +4,36 @@ import classes from './Users.module.css';
 import userPhoto from '../../assets/images/user.png'
 
 class Users extends React.Component{
-    componentDidMount(){  axios.get('https://social-network.samuraijs.com/api/1.0/users').then(response=>{
+    componentDidMount(){  axios.get(`https://social-network.samuraijs.com/api/1.0/users?count=${this.props.pageSize}&page=${this.props.currentPage}`).then(response=>{
         this.props.setUsers(response.data.items);
+        this.props.setTotalUsersCount(response.data.totalCount);
     })};
+    onPageChanged = (pageNumber)=> {
+        debugger;
+        this.props.setCurrentPage(pageNumber)
+        axios.get(`https://social-network.samuraijs.com/api/1.0/users?count=${this.props.pageSize}&page=${pageNumber}`).then(response=>{
+            this.props.setUsers(response.data.items);
+           
+        })
+    }
     
 render(){
+    let pages = Math.ceil(this.props.totalUsersCount/this.props.pageSize)
+        let pagesArr = [];
+    for (let i=1; i<=pages; i++){
+       
+        if(pagesArr.length< 15){ pagesArr.push(i);}
+
+    }
+
     return <div>
+        
+        <div>
+         {pagesArr.map(m=>{
+              return <span className={this.props.currentPage === m && classes.selectedPage} onClick={(e)=>{this.onPageChanged(m)}}>{m}</span>
+          }
+          )}
+        </div>
     {
     this.props.users.map(u=> <div key={u.id}>
             <span>
@@ -38,3 +62,12 @@ render(){
 }
 
 export default Users;
+
+
+
+
+
+
+
+
+
