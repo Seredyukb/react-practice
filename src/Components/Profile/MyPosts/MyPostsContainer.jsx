@@ -6,7 +6,6 @@ import MyPosts from "./MyPosts";
 
 
 let mapStateToProps=(state)=>{
-    debugger;
     return {
         postData:state.profilePage.postData,
         newPostText:state.profilePage.newPostText

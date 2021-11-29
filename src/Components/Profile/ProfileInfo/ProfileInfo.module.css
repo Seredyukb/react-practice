@@ -1,3 +1,10 @@
 .descriptionBlock {
     padding: 10px;
 }
+.status {
+    color: grey;
+    font-style: italic;
+}
+.disabledWords {
+    opacity: 0;
+}

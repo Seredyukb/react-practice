@@ -3,17 +3,12 @@ import classes from './MyPosts.module.css';
 import Post from "./Post/Post";
 
 const MyPosts = (props) => {
-    debugger;
-
-
-
     let postsElements = props.postData.map(p => { return <Post message={p.message} count={p.count} /> })
     let textAreaData = React.createRef();
     let OnaddPost = () => {
         props.addPost();
     }
     let addNewPosta = () => {
-        debugger;
         let text = textAreaData.current.value;
         props.addNewPost(text);
     }
