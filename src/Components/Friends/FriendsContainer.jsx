@@ -3,7 +3,6 @@ import Friends from "./Friends";
 
 
 let mapStateToProps = (state)=>{
-    debugger;
     return{
         friendsData: state.friendsPage.friendsData,
     }

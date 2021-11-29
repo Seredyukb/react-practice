@@ -10,12 +10,13 @@ import DialogsContainer from './Components/Dialogs/DialogsContainer';
 import UsersContainer from './Components/Users/UsersContainer';
 import FriendsContainer from './Components/Friends/FriendsContainer';
 import newsContainer from './Components/News/NewsContainer';
+import HeaderContainer from './Components/Header/HeaderContainer';
 
 const App = (props) => {
   return (
     <BrowserRouter>
       <div className="app-wrapper">
-        <Header />
+        <HeaderContainer />
         <NavBar />
         {/* <Profile /> */}
         <div className='app-wrapper-content'>
