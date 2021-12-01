@@ -15,7 +15,8 @@ let Users = (props)=>{
     return <div>
         <div>
            
-         {pagesArr.map(m=>{
+         {
+         pagesArr.map(m=>{
             return <span className={props.currentPage === m && classes.selectedPage} id={classes.page} onClick={(e)=>{props.onPageChanged(m)}}>{m}</span>
           }
           )}
@@ -30,21 +31,28 @@ let Users = (props)=>{
                     </NavLink>                
                 </div>
                 <div>
+                   
                     {u.followed
-                    ?<button onClick={()=>{
+                    ?<button  disabled={props.followingInProgress.some(id=>id===u.id)} onClick={()=>{
+                        props.toggleIsFollow(true, u.id);
+                        
                       usersAPI.unfollowDelete(u.id).then(data=>{
                            if(data.resultCode === 0){
                             props.unfollow(u.id)
                            }
                            })
+                           props.toggleIsFollow(false, u.id);
                         }}>Unfollow</button>
 
-                    :<button onClick={()=>{
+                    :<button disabled={(props.followingInProgress.some(id=>id===u.id))} onClick={()=>{
+                        props.toggleIsFollow(true, u.id);
                         usersAPI.followPost(u.id).then(data=>{
                             if(data.resultCode === 0){
                              props.follow(u.id)
                             }
-                            })}}>Follow</button>}
+                            })
+                            props.toggleIsFollow(false, u.id);
+                            }}>Follow</button>}
 
                 </div>
             </span>
