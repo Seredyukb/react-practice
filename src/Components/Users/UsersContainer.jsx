@@ -1,29 +1,30 @@
 import { connect } from "react-redux";
 import React from "react";
-import { follow, setUsers, unfollow, setCurrentPage, setTotalUsersCount, toggleIsFetching, toggleIsFollow } from "../../Redux/UsersReducer";
+import { follow, unfollow, setCurrentPage,  toggleIsFollow, thunkGetUsersFirstCreator,thunkGetUsersOnPageChangedCreator, thunkFollowCreator, thunkUnfollowCreator } from "../../Redux/UsersReducer";
 import Users from "./Users";
 import Preloader from "../Common/Preloader/preloader";
-import { usersAPI } from "../../API/api";
 
 class UsersContainer extends React.Component{
     componentDidMount(){  
-        this.props.toggleIsFetching(true);
-        usersAPI.getUsers(this.props.currentPage, this.props.pageSize).then(data=>{
-        this.props.toggleIsFetching(false);
-        this.props.setUsers(data.items);
-        this.props.setTotalUsersCount(data.totalCount);
-    })};
+        this.props.thunkGetUsersFirstCreator(this.props.currentPage, this.props.pageSize); 
+    //     this.props.toggleIsFetching(true);
+    //     usersAPI.getUsers(this.props.currentPage, this.props.pageSize).then(data=>{
+    //     this.props.toggleIsFetching(false);
+    //     this.props.setUsers(data.items);
+    //     this.props.setTotalUsersCount(data.totalCount);
+    // })
+};
     onPageChanged = (pageNumber)=> {
-        this.props.toggleIsFetching(true);
-        this.props.setCurrentPage(pageNumber)
-        usersAPI.getUsers(pageNumber, this.props.pageSize).then(data=>{
-        this.props.toggleIsFetching(false);
-        this.props.setUsers(data.items);
-        })
+        this.props.thunkGetUsersOnPageChangedCreator(pageNumber, this.props.pageSize);
+        // this.props.toggleIsFetching(true);
+        // this.props.setCurrentPage(pageNumber)
+        // usersAPI.getUsers(pageNumber, this.props.pageSize).then(data=>{
+        // this.props.toggleIsFetching(false);
+        // this.props.setUsers(data.items);
+        // })
     }
     
 render(){
-    
 
     return <>
     {this.props.isFetching? <Preloader/> :null}
@@ -35,7 +36,9 @@ render(){
      follow={this.props.follow} 
      unfollow={this.props.unfollow}
      toggleIsFollow={this.props.toggleIsFollow}
-     followingInProgress={this.props.followingInProgress}     
+     followingInProgress={this.props.followingInProgress}
+     thunkFollowCreator={this.props.thunkFollowCreator}     
+     thunkUnfollowCreator={this.props.thunkUnfollowCreator}     
      
      />
      </>
@@ -65,4 +68,4 @@ let mapStateToProps = (state)=> {
 // }
 
 
-export default connect(mapStateToProps,{follow, unfollow, setUsers, setCurrentPage, setTotalUsersCount, toggleIsFetching, toggleIsFollow})(UsersContainer)
+export default connect(mapStateToProps,{follow, unfollow, setCurrentPage, toggleIsFollow, thunkGetUsersFirstCreator, thunkGetUsersOnPageChangedCreator, thunkFollowCreator, thunkUnfollowCreator})(UsersContainer)
