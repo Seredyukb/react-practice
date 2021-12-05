@@ -1,7 +1,11 @@
 import React from "react";
+import { Redirect } from "react-router";
 import classes from './News.module.css';
 
 const News = (props) => {
+    if(!props.isAuth){
+        return <Redirect to='/Login'/>
+    }
     return <div>{
         props.newsData.map(m=><div key={m.id} className={classes.main}>
                 <div>

@@ -3,7 +3,8 @@ import News from "./News";
 
 let mapStateToProps = (state)=>{
     return {
-        newsData: state.newsPage.newsData
+        newsData: state.newsPage.newsData,
+        isAuth: state.auth.isAuth,
     }   
 }
 

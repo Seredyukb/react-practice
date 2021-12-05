@@ -3,6 +3,7 @@ import React from "react";
 import { follow, unfollow, setCurrentPage,  toggleIsFollow, thunkGetUsersFirstCreator,thunkGetUsersOnPageChangedCreator, thunkFollowCreator, thunkUnfollowCreator } from "../../Redux/UsersReducer";
 import Users from "./Users";
 import Preloader from "../Common/Preloader/preloader";
+import { Redirect } from "react-router";
 
 class UsersContainer extends React.Component{
     componentDidMount(){  
@@ -25,6 +26,9 @@ class UsersContainer extends React.Component{
     }
     
 render(){
+    if(!this.props.isAuth){
+        return <Redirect to='/Login'/>
+    }
 
     return <>
     {this.props.isFetching? <Preloader/> :null}
@@ -53,6 +57,7 @@ let mapStateToProps = (state)=> {
         currentPage: state.usersPage.currentPage,
         isFetching: state.usersPage.isFetching,
         followingInProgress: state.usersPage.followingInProgress,
+        isAuth: state.auth.isAuth,
         
     }
 }
