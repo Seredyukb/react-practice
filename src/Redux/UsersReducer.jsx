@@ -121,9 +121,4 @@ export const thunkUnfollowCreator = (id)=>{
     }
 }
 
-
-
-
-
-
 export default UsersReducer;

@@ -1,3 +1,5 @@
+import { usersAPI } from "../API/api";
+
 const ADD_POST = 'addPosta';
 const UPDATE_NEW_POST_TEXT = 'updateNewPosta';
 const SET_USER_PROFILE = 'SET_USER_PROFILE';
@@ -46,6 +48,7 @@ const profileReducer = (state = initialState, action) => {
             return stateCopy;
         }
         case SET_USER_PROFILE:{
+            debugger;
             return {...state, profile: action.profile}
         }
         default:{
@@ -58,6 +61,15 @@ const profileReducer = (state = initialState, action) => {
 export const actionCreatorUpdateNewPosta = (text) => ({ type: UPDATE_NEW_POST_TEXT, newText: text })
 export const actionCreatorAddPosta = () => ({ type: ADD_POST });
 export const setUserProfile = (profile) => ({ type: SET_USER_PROFILE, profile });
+export const thunkGetProfile = (userId)=>{
+    return (dispatch)=>{
+       usersAPI.getProfile(userId).then(response=>{
+       dispatch(setUserProfile(response.data))
+    })
+    }
+}
+
+
 
 
 export default profileReducer;
