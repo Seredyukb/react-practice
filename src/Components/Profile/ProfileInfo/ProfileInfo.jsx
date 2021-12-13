@@ -19,7 +19,7 @@ const ProfileInfo = (props) => {
                 <div>
                 <span>{props.profile.fullName}</span><br />
 
-                <ProfileStatus status={'Я креветка'}/>
+                <ProfileStatus status={props.status} thunkUpdateStatus={props.thunkUpdateStatus}/>
 
                 <span className={classes.status}>{props.profile.aboutMe}</span><br />
 

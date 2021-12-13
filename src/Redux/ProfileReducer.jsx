@@ -1,8 +1,9 @@
-import { usersAPI } from "../API/api";
+import { profileAPI, usersAPI } from "../API/api";
 
 const ADD_POST = 'addPosta';
 const UPDATE_NEW_POST_TEXT = 'updateNewPosta';
 const SET_USER_PROFILE = 'SET_USER_PROFILE';
+const SET_STATUS = 'SET_STATUS';
 
 
 let initialState = {
@@ -21,6 +22,7 @@ let initialState = {
     ],
     newPostText: 'IT-Kamasutra',
     profile: null,
+    status:'',
 
 }
 
@@ -50,6 +52,9 @@ const profileReducer = (state = initialState, action) => {
         case SET_USER_PROFILE:{
             return {...state, profile: action.profile}
         }
+        case SET_STATUS:{
+            return {...state, status: action.status}
+        }
         default:{
             return state;
         }
@@ -60,10 +65,28 @@ const profileReducer = (state = initialState, action) => {
 export const actionCreatorUpdateNewPosta = (text) => ({ type: UPDATE_NEW_POST_TEXT, newText: text })
 export const actionCreatorAddPosta = () => ({ type: ADD_POST });
 export const setUserProfile = (profile) => ({ type: SET_USER_PROFILE, profile });
+export const setStatus = (status) => ({ type: SET_STATUS, status });
 export const thunkGetProfile = (userId)=>{
     return (dispatch)=>{
        usersAPI.getProfile(userId).then(response=>{
        dispatch(setUserProfile(response.data))
+    })
+    }
+}
+export const thunkGetStatus = (userId)=>{
+    return (dispatch)=>{
+       profileAPI.getProfileStatus(userId).then(response=>{
+       dispatch(setStatus(response.data))
+    })
+    }
+}
+export const thunkUpdateStatus = (status)=>{
+    return (dispatch)=>{
+       profileAPI.updateProfileStatus(status).then(response=>{
+           debugger;
+           if(response.data.resultCode === 0){
+                dispatch(setStatus(status))
+           }
     })
     }
 }
