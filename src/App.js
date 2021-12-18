@@ -24,7 +24,7 @@ const App = (props) => {
           <Route path='/Profile/:userId?' render={() => <ProfileContainer />} />
           <Route path='/Users' component={UsersContainer} />
           <Route path='/News' component={newsContainer} />
-          <Route path='/Login' component={Login} />
+          <Route path='/Login' component={() => <Login />} />
           <Route path='/Settings' component={Settings} />
           <Route path='/Friends' render={() => <FriendsContainer />} />
         </div>
