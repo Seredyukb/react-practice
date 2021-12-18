@@ -4,10 +4,10 @@ import DialogItem from "./DialogItem/DialogItem";
 import Message from "./Message/Message";
 import Field from "redux-form/lib/Field";
 import reduxForm from "redux-form/lib/reduxForm";
+import {TextArea} from "../Common/FormsControls/FormsControls";
+import { MaxLength100, MinLength2, required } from "../../Utils/Validators/validators";
 const Dialogs = (props) => {
     let state = props.dialogsPage;
-    let newMessageBody = state.newMessageBody;
-    let textAreaDialogsRef = React.createRef();
     let newDialogsResult = state.dialogsData.map(el => {
 
         return <DialogItem id={el.id} name={el.name} ava={el.ava} />
@@ -19,7 +19,6 @@ const Dialogs = (props) => {
     })
     
     let onSendMessage = (values) => {
-        alert(values.newMessageBody)
         props.onSendMessageClick(values.newMessageBody);
 
 
@@ -55,7 +54,7 @@ const Dialogs = (props) => {
         return (
             <form onSubmit={props.handleSubmit}>
             <div>
-            <Field component='textarea' placeholder='Enter your message' name='newMessageBody'/>
+            <Field component={TextArea} placeholder='Enter your message' name='newMessageBody' validate={[required, MinLength2, MaxLength100]}/>
             </div>
         
         <div>

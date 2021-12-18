@@ -1,7 +1,6 @@
 import { profileAPI, usersAPI } from "../API/api";
 
 const ADD_POST = 'addPosta';
-const UPDATE_NEW_POST_TEXT = 'updateNewPosta';
 const SET_USER_PROFILE = 'SET_USER_PROFILE';
 const SET_STATUS = 'SET_STATUS';
 
@@ -35,20 +34,14 @@ const profileReducer = (state = initialState, action) => {
             let stateCopy={...state};
             let newPosta = {
                 id: stateCopy.postData.length + 1,
-                message: stateCopy.newPostText,
+                message: action.mypoststextarea,
                 count: 0,
             }
             stateCopy.postData=[...state.postData];
             stateCopy.postData.push(newPosta);
-            stateCopy.newPostText = '';
             return stateCopy;
         }
-        case UPDATE_NEW_POST_TEXT:{
-            let stateCopy={...state};
-            let newText = action.newText;
-            stateCopy.newPostText = newText;
-            return stateCopy;
-        }
+        
         case SET_USER_PROFILE:{
             return {...state, profile: action.profile}
         }
@@ -62,8 +55,8 @@ const profileReducer = (state = initialState, action) => {
 }
 
 
-export const actionCreatorUpdateNewPosta = (text) => ({ type: UPDATE_NEW_POST_TEXT, newText: text })
-export const actionCreatorAddPosta = () => ({ type: ADD_POST });
+
+export const actionCreatorAddPosta = (mypoststextarea) => ({ type: ADD_POST, mypoststextarea });
 export const setUserProfile = (profile) => ({ type: SET_USER_PROFILE, profile });
 export const setStatus = (status) => ({ type: SET_STATUS, status });
 export const thunkGetProfile = (userId)=>{
