@@ -13,7 +13,12 @@ class ProfileContainer extends React.Component{
         debugger;
         let userId = this.props.match.params.userId;
         if (!userId){
-            userId=this.props.authorizedUserId;
+            // userId=this.props.authorizedUserId;
+            // if(!userId){
+            //     this.props.history.push('/login')
+            // }
+            userId= 21081;
+            //  ХардКод если не найду решение. иначе работает просто прелоадер и не появлется профайлИнфо. UserId приходит как Null и процесс зацикливается
         }
         this.props.thunkGetProfile(userId)
         this.props.thunkGetStatus(userId)

@@ -12,15 +12,19 @@ import newsContainer from './Components/News/NewsContainer';
 import HeaderContainer from './Components/Header/HeaderContainer';
 import Login from './Components/Login/Login';
 import { connect } from 'react-redux';
-import { thunkAuthCreator } from './Redux/Auth-reducer'
-import { withRouter } from 'react-router-dom/cjs/react-router-dom.min';
-import { compose } from 'redux';
+import { initializeApp } from '../src/Redux/App-reducer'
+import Preloader from './Components/Common/Preloader/preloader';
 
 class App extends Component {
   componentDidMount() {
-    this.props.thunkAuthCreator();
+    this.props.initializeApp();
   }
   render() {
+    if (!this.props.initialized) {
+      return <Preloader />
+    }
+
+
     return (
       <BrowserRouter>
         <div className="app-wrapper">
@@ -40,9 +44,12 @@ class App extends Component {
       </BrowserRouter>
     )
   }
-
-
 }
 
-export default connect(null, { thunkAuthCreator })(App)
+
+const mapStateToProps = (state) => ({
+  initialized: state.app.initialized,
+})
+
+export default connect(mapStateToProps, { initializeApp })(App)
 
