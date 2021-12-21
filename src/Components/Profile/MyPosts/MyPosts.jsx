@@ -10,7 +10,7 @@ import { TextArea } from "../../Common/FormsControls/FormsControls";
 import classes from "./MyPosts.module.css";
 import Post from "./Post/Post";
 
-const MyPosts = (props) => {
+const MyPosts = React.memo((props) => {
   let postsElements = props.postData.map((p) => {
     return <Post message={p.message} count={p.count} />;
   });
@@ -52,5 +52,5 @@ const MyPosts = (props) => {
       </div>
     </div>
   );
-};
+});
 export default MyPosts;
