@@ -5,7 +5,7 @@ const FriendsItem = (props) => {
   return (
     <div className={classes.FriendsItemBlock}>
       <div className={classes.item}>
-        <img src={`${props.ava}`} />
+        <img src={`${props.ava}`} alt="boom" />
         <div>{props.name}</div>
       </div>
     </div>
