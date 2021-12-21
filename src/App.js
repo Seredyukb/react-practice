@@ -24,7 +24,6 @@ class App extends Component {
       return <Preloader />
     }
 
-
     return (
       <BrowserRouter>
         <div className="app-wrapper">
