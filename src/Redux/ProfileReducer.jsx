@@ -3,6 +3,7 @@ import { profileAPI, usersAPI } from "../API/api";
 const ADD_POST = "addPosta";
 const SET_USER_PROFILE = "SET_USER_PROFILE";
 const SET_STATUS = "SET_STATUS";
+const DELETE_POST = "DELETE_POST";
 
 let initialState = {
   postData: [
@@ -42,6 +43,14 @@ const profileReducer = (state = initialState, action) => {
     case SET_STATUS: {
       return { ...state, status: action.status };
     }
+    case DELETE_POST: {
+      return {
+        ...state,
+        postData: state.postData.filter((p) => {
+          return p.postId !== action.postId;
+        }),
+      };
+    }
     default: {
       return state;
     }
@@ -51,6 +60,10 @@ const profileReducer = (state = initialState, action) => {
 export const actionCreatorAddPosta = (mypoststextarea) => ({
   type: ADD_POST,
   mypoststextarea,
+});
+export const actionCreatorDeletePost = (postId) => ({
+  type: DELETE_POST,
+  postId,
 });
 export const setUserProfile = (profile) => ({
   type: SET_USER_PROFILE,
@@ -74,7 +87,6 @@ export const thunkGetStatus = (userId) => {
 export const thunkUpdateStatus = (status) => {
   return (dispatch) => {
     profileAPI.updateProfileStatus(status).then((response) => {
-      debugger;
       if (response.data.resultCode === 0) {
         dispatch(setStatus(status));
       }
