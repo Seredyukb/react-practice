@@ -41,10 +41,10 @@ export const profileAPI = {
         return instance.get(`profile/${id}`)
     },
     getProfileStatus(id) {
-        return instance.get(`profile/status/${id}`)
+        return instance.get(`profile/status/${id}`).then(response => response.data)
     },
     updateProfileStatus(status) {
-        return instance.put(`profile/status`, { status: status })
+        return instance.put(`profile/status`, { status: status }).then(response => response.data)
     },
 
 }

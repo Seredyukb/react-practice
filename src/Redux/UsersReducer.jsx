@@ -1,4 +1,5 @@
 import { usersAPI } from "../API/api";
+import { updateObjectInArray } from "../Utils/object-helpers";
 
 const FOLLOW = "FOLLOW";
 const UNFOLLOW = "UNFOLLOW";
@@ -22,12 +23,16 @@ const UsersReducer = (state = initialState, action) => {
     case FOLLOW: {
       let stateCopy = {
         ...state,
-        users: state.users.map((u) => {
-          if (u.id === action.usersId) {
-            return { ...u, followed: true };
-          }
-          return u;
+        users: updateObjectInArray(state.users, action.usersId, "id", {
+          followed: true,
         }),
+        //refactoring DRY
+        // state.users.map((u) => {
+        //   if (u.id === action.usersId) {
+        //     return { ...u, followed: true };
+        //   }
+        //   return u;
+        // }),
       };
 
       return stateCopy;
@@ -35,12 +40,16 @@ const UsersReducer = (state = initialState, action) => {
     case UNFOLLOW: {
       let stateCopy = {
         ...state,
-        users: state.users.map((u) => {
-          if (u.id === action.usersId) {
-            return { ...u, followed: false };
-          }
-          return u;
+        users: updateObjectInArray(state.users, action.usersId, "id", {
+          followed: false,
         }),
+        //refactoring DRY
+        // state.users.map((u) => {
+        //   if (u.id === action.usersId) {
+        //     return { ...u, followed: false };
+        //   }
+        //   return u;
+        // }),
       };
       return stateCopy;
     }
@@ -69,7 +78,6 @@ const UsersReducer = (state = initialState, action) => {
     }
   }
 };
-
 export const follow = (usersId) => ({ type: FOLLOW, usersId: usersId });
 export const unfollow = (usersId) => ({ type: UNFOLLOW, usersId: usersId });
 export const setUsers = (users) => ({ type: SET_USERS, users: users });
@@ -90,48 +98,41 @@ export const toggleIsFollow = (isFetching, userId) => ({
   isFetching,
   userId,
 });
-
-export const thunkGetUsersFirstCreator = (currentPage, pageSize) => {
-  return (dispatch) => {
-    dispatch(toggleIsFetching(true));
-    usersAPI.getUsers(currentPage, pageSize).then((data) => {
-      dispatch(toggleIsFetching(false));
-      dispatch(setUsers(data.items));
-      dispatch(setTotalUsersCount(data.totalCount));
-    });
-  };
+//refactoring DRY
+const followUnfollowFlow = async (dispatch, id, actionCreator, apiMethod) => {
+  dispatch(toggleIsFollow(true, id));
+  let data = await apiMethod(id);
+  if (data.resultCode === 0) {
+    dispatch(actionCreator(id));
+  }
+  dispatch(toggleIsFollow(false, id));
 };
-export const thunkGetUsersOnPageChangedCreator = (pageNumber, pageSize) => {
-  return (dispatch) => {
+export const thunkGetUsersFirstCreator =
+  (currentPage, pageSize) => async (dispatch) => {
+    dispatch(toggleIsFetching(true));
+    let data = await usersAPI.getUsers(currentPage, pageSize);
+    dispatch(toggleIsFetching(false));
+    dispatch(setUsers(data.items));
+    dispatch(setTotalUsersCount(data.totalCount));
+  };
+export const thunkGetUsersOnPageChangedCreator =
+  (pageNumber, pageSize) => async (dispatch) => {
     dispatch(toggleIsFetching(true));
     dispatch(setCurrentPage(pageNumber));
-    usersAPI.getUsers(pageNumber, pageSize).then((data) => {
-      dispatch(toggleIsFetching(false));
-      dispatch(setUsers(data.items));
-    });
+    let data = await usersAPI.getUsers(pageNumber, pageSize);
+    dispatch(toggleIsFetching(false));
+    dispatch(setUsers(data.items));
   };
+export const thunkFollowCreator = (id) => async (dispatch) => {
+  followUnfollowFlow(
+    dispatch,
+    id,
+    unfollow,
+    usersAPI.unfollowDelete.bind(usersAPI)
+  );
 };
-export const thunkFollowCreator = (id) => {
-  return (dispatch) => {
-    dispatch(toggleIsFollow(true, id));
-    usersAPI.unfollowDelete(id).then((data) => {
-      if (data.resultCode === 0) {
-        dispatch(unfollow(id));
-      }
-    });
-    dispatch(toggleIsFollow(false, id));
-  };
-};
-export const thunkUnfollowCreator = (id) => {
-  return (dispatch) => {
-    dispatch(toggleIsFollow(true, id));
-    usersAPI.followPost(id).then((data) => {
-      if (data.resultCode === 0) {
-        dispatch(follow(id));
-      }
-    });
-    dispatch(toggleIsFollow(false, id));
-  };
+export const thunkUnfollowCreator = (id) => async (dispatch) => {
+  followUnfollowFlow(dispatch, id, follow, usersAPI.followPost.bind(usersAPI));
 };
 
 export default UsersReducer;

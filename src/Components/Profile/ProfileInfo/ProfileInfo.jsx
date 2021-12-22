@@ -3,91 +3,87 @@ import Preloader from "../../Common/Preloader/preloader";
 import classes from "./ProfileInfo.module.css";
 import ProfileStatusWithHooks from "./ProfileStatusWithHooks";
 
-const ProfileInfo = (props) => {
-  if (!props.profile) {
+const ProfileInfo = ({ profile, status, thunkUpdateStatus }) => {
+  if (!profile) {
     return <Preloader />;
   }
 
   return (
     <div className={classes.content}>
-      {/* <img src='https://images.pexels.com/photos/1987301/pexels-photo-1987301.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500' /> */}
       <div className={classes.descriptionBlock}>
-        <img src={props.profile.photos.large} alt="asd" />
+        <img src={profile.photos.large} alt="asd" />
         <div>
-          <span>{props.profile.fullName}</span>
+          <span>{profile.fullName}</span>
           <br />
-
           <ProfileStatusWithHooks
-            status={props.status}
-            thunkUpdateStatus={props.thunkUpdateStatus}
+            status={status}
+            thunkUpdateStatus={thunkUpdateStatus}
           />
-
-          <span className={classes.status}>{props.profile.aboutMe}</span>
+          <span className={classes.status}>{profile.aboutMe}</span>
           <br />
-
           <br />
           <span>Мои контакты:</span>
           <br />
           <br />
-          <span>facebook: {props.profile.contacts.facebook}</span>
+          <span>facebook: {profile.contacts.facebook}</span>
           <br />
           <span>
             website:{" "}
-            {!props.profile.contacts.website
+            {!profile.contacts.website
               ? "Информация не заполнена"
-              : props.profile.contacts.website}
+              : profile.contacts.website}
           </span>
           <br />
           <span>
             vk:{" "}
-            {!props.profile.contacts.vk
+            {!profile.contacts.vk
               ? "Информация не заполнена"
-              : props.profile.contacts.vk}
+              : profile.contacts.vk}
           </span>
           <br />
           <span>
             twitter:{" "}
-            {!props.profile.contacts.twitter
+            {!profile.contacts.twitter
               ? "Информация не заполнена"
-              : props.profile.contacts.twitter}
+              : profile.contacts.twitter}
           </span>
           <br />
           <span>
             instagram:{" "}
-            {!props.profile.contacts.instagram
+            {!profile.contacts.instagram
               ? "Информация не заполнена"
-              : props.profile.contacts.instagram}
+              : profile.contacts.instagram}
           </span>
           <br />
           <span>
             youtube:{" "}
-            {!props.profile.contacts.youtube
+            {!profile.contacts.youtube
               ? "Информация не заполнена"
-              : props.profile.contacts.youtube}
+              : profile.contacts.youtube}
           </span>
           <br />
           <span>
             github:{" "}
-            {!props.profile.contacts.github
+            {!profile.contacts.github
               ? "Информация не заполнена"
-              : props.profile.contacts.github}
+              : profile.contacts.github}
           </span>
           <br />
           <span>
             mainLink:{" "}
-            {!props.profile.contacts.mainLink
+            {!profile.contacts.mainLink
               ? "Информация не заполнена"
-              : props.profile.contacts.mainLink}
+              : profile.contacts.mainLink}
           </span>
           <br />
           <br />
           <br />
           <span>
             {" "}
-            В поиске работы: {!props.profile.lookingForAJob ? "ДА" : "НЕТ"}
+            В поиске работы: {!profile.lookingForAJob ? "ДА" : "НЕТ"}
           </span>
           <br />
-          <span> Описание: {props.profile.lookingForAJobDescription}</span>
+          <span> Описание: {profile.lookingForAJobDescription}</span>
         </div>
       </div>
     </div>

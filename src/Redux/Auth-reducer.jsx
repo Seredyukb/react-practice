@@ -1,7 +1,7 @@
 import { stopSubmit } from "redux-form";
 import { usersAPI } from "../API/api";
 
-const SET_USER_DATA = "SET_USER_DATA";
+const SET_USER_DATA = "auth/SET_USER_DATA";
 
 let initialState = {
   userId: null,
@@ -26,30 +26,28 @@ export const setAuthUserData = (id, email, login, isAuth) => ({
   payload: { id, email, login, isAuth },
 });
 
-export const thunkAuthCreator = () => (dispatch) => {
-  return usersAPI.authGet().then((data) => {
-    if (data.resultCode === 0) {
-      let { id, login, email } = data.data;
-      dispatch(setAuthUserData(id, email, login, true));
-    }
-  });
+export const thunkAuthCreator = () => async (dispatch) => {
+  let data = await usersAPI.authGet();
+  if (data.resultCode === 0) {
+    let { id, login, email } = data.data;
+    dispatch(setAuthUserData(id, email, login, true));
+  }
 };
 
-export const login = (email, password, rememberMe) => (dispatch) => {
-  usersAPI.login(email, password, rememberMe).then((data) => {
-    if (data.resultCode === 0) {
-      dispatch(thunkAuthCreator());
-    } else {
-      dispatch(stopSubmit("login", { _error: "e-mail or password is wrong" }));
-    }
-  });
+export const login = (email, password, rememberMe) => async (dispatch) => {
+  let data = await usersAPI.login(email, password, rememberMe);
+  if (data.resultCode === 0) {
+    dispatch(thunkAuthCreator());
+  } else {
+    dispatch(stopSubmit("login", { _error: "e-mail or password is wrong" }));
+  }
 };
-export const logout = () => (dispatch) => {
-  usersAPI.logout().then((data) => {
-    if (data.resultCode === 0) {
-      dispatch(setAuthUserData(null, null, null, false));
-    }
-  });
+
+export const logout = () => async (dispatch) => {
+  let data = await usersAPI.logout();
+  if (data.resultCode === 0) {
+    dispatch(setAuthUserData(null, null, null, false));
+  }
 };
 
 export default authReducer;

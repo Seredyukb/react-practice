@@ -1,0 +1,9 @@
+.selectedPage {
+  font-weight: bold;
+  font-size: 20px;
+}
+#page {
+  padding-left: 5px;
+  padding-right: 5px;
+  cursor: pointer;
+}
