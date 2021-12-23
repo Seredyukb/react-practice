@@ -10,11 +10,13 @@ import FriendsContainer from "./Components/Friends/FriendsContainer";
 import newsContainer from "./Components/News/NewsContainer";
 import HeaderContainer from "./Components/Header/HeaderContainer";
 import Login from "./Components/Login/Login";
-import { connect } from "react-redux";
+import { connect, Provider } from "react-redux";
 import { initializeApp } from "../src/Redux/App-reducer";
 import Preloader from "./Components/Common/Preloader/preloader";
 import { compose } from "redux";
 import { withRouter } from "react-router-dom/cjs/react-router-dom.min";
+import { BrowserRouter } from "react-router-dom";
+import store from "./Redux/Redux-store";
 
 class App extends Component {
   componentDidMount() {
@@ -51,7 +53,19 @@ const mapStateToProps = (state) => ({
   initialized: state.app.initialized,
 });
 
-export default compose(
+let AppContainer = compose(
   withRouter,
   connect(mapStateToProps, { initializeApp })
 )(App);
+
+
+let MainApp = (props)=>{
+  return <BrowserRouter>
+  <Provider store={store}>
+    <AppContainer />
+  </Provider>
+</BrowserRouter>
+}
+
+
+export default MainApp;
