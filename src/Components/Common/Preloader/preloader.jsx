@@ -1,7 +1,11 @@
 import React from "react";
-import preloader from "../../../assets/images/preloader.svg";
+import classes from "./preloader.module.css";
 
 let Preloader = () => {
-  return <img src={preloader} alt="Preloader" />;
+  return (
+    <div className={classes.spinnerWrapper}>
+      <div className={classes.spinner}></div>;
+    </div>
+  );
 };
 export default Preloader;

@@ -11,6 +11,7 @@
   grid-column-gap: 10px;
   grid-row-gap: 10px;
   /* grid-gap: 10px; */
+  overflow: visible;
 }
 
 .app-wrapper-content {

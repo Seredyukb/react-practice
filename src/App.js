@@ -28,7 +28,7 @@ class App extends Component {
     }
 
     return (
-      <div className="app-wrapper">
+      <div className="app-wrapper spinnerWrapper">
         <HeaderContainer />
         <NavBar />
         {/* <Profile /> */}
@@ -59,12 +59,12 @@ let AppContainer = compose(
 )(App);
 
 
-let MainApp = (props)=>{
+let MainApp = (props) => {
   return <BrowserRouter>
-  <Provider store={store}>
-    <AppContainer />
-  </Provider>
-</BrowserRouter>
+    <Provider store={store}>
+      <AppContainer />
+    </Provider>
+  </BrowserRouter>
 }
 
 

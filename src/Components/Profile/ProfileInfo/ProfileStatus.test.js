@@ -23,8 +23,9 @@ describe("ProfileStatus component", () => {
   test("After creation input with status shouldn't be displayed", () => {
     const component = create(<ProfileStatus status="NEW STATUS" />);
     const root = component.root;
+
     expect(() => {
-      let input = root.findByType("input");
+      let input = root.findByType('input');
 
     }).toThrow();
   });
