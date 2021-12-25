@@ -1,23 +1,23 @@
 {
   "files": {
-    "main.css": "/react-practice/static/css/main.605b322c.chunk.css",
-    "main.js": "/react-practice/static/js/main.be7458b6.chunk.js",
-    "main.js.map": "/react-practice/static/js/main.be7458b6.chunk.js.map",
-    "runtime-main.js": "/react-practice/static/js/runtime-main.31724918.js",
-    "runtime-main.js.map": "/react-practice/static/js/runtime-main.31724918.js.map",
-    "static/js/2.98a4f4fc.chunk.js": "/react-practice/static/js/2.98a4f4fc.chunk.js",
-    "static/js/2.98a4f4fc.chunk.js.map": "/react-practice/static/js/2.98a4f4fc.chunk.js.map",
-    "static/js/3.2cbf6e84.chunk.js": "/react-practice/static/js/3.2cbf6e84.chunk.js",
-    "static/js/3.2cbf6e84.chunk.js.map": "/react-practice/static/js/3.2cbf6e84.chunk.js.map",
+    "main.css": "/react-practice/static/css/main.d954293e.chunk.css",
+    "main.js": "/react-practice/static/js/main.81aaff44.chunk.js",
+    "main.js.map": "/react-practice/static/js/main.81aaff44.chunk.js.map",
+    "runtime-main.js": "/react-practice/static/js/runtime-main.ca6a717b.js",
+    "runtime-main.js.map": "/react-practice/static/js/runtime-main.ca6a717b.js.map",
+    "static/js/2.f9faf701.chunk.js": "/react-practice/static/js/2.f9faf701.chunk.js",
+    "static/js/2.f9faf701.chunk.js.map": "/react-practice/static/js/2.f9faf701.chunk.js.map",
+    "static/js/3.230a62f7.chunk.js": "/react-practice/static/js/3.230a62f7.chunk.js",
+    "static/js/3.230a62f7.chunk.js.map": "/react-practice/static/js/3.230a62f7.chunk.js.map",
     "index.html": "/react-practice/index.html",
-    "static/css/main.605b322c.chunk.css.map": "/react-practice/static/css/main.605b322c.chunk.css.map",
-    "static/js/2.98a4f4fc.chunk.js.LICENSE.txt": "/react-practice/static/js/2.98a4f4fc.chunk.js.LICENSE.txt",
+    "static/css/main.d954293e.chunk.css.map": "/react-practice/static/css/main.d954293e.chunk.css.map",
+    "static/js/2.f9faf701.chunk.js.LICENSE.txt": "/react-practice/static/js/2.f9faf701.chunk.js.LICENSE.txt",
     "static/media/user.769c19e1.png": "/react-practice/static/media/user.769c19e1.png"
   },
   "entrypoints": [
-    "static/js/runtime-main.31724918.js",
-    "static/js/2.98a4f4fc.chunk.js",
-    "static/css/main.605b322c.chunk.css",
-    "static/js/main.be7458b6.chunk.js"
+    "static/js/runtime-main.ca6a717b.js",
+    "static/js/2.f9faf701.chunk.js",
+    "static/css/main.d954293e.chunk.css",
+    "static/js/main.81aaff44.chunk.js"
   ]
 }
