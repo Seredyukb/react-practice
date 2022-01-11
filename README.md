@@ -1,5 +1,11 @@
 # Getting Started with Create React App
 
+Данные для входа: 
+Email: free@samuraijs.com
+
+Password: free
+
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 # https://seredyukb.github.io/react-practice/
